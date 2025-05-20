@@ -1,0 +1,209 @@
+/* @font-face {
+  font-family: 'Blacklisted';
+  src: url('../public//fonts/Blacklisted.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'airTravelersFont';
+  src: url('../public/fonts/AirTravelers.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AmericanCaptain';
+  src: url('../public/fonts/AmericanCaptain.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'amoria';
+  src: url('../public/fonts/Amoria.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OldLondon';
+  src: url('../public/fonts/OldLondon.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tt';
+  src: url('../public/fonts/Amoria.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sundrops';
+  src: url('../public/fonts/SundropsDisplay.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TtRegular';
+  src: url('../public/fonts/TT\ Interphases\ Pro\ Trial\ Condensed\ Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+/* @font-face {
+  font-family: 'ABC Hebrew';
+  src: url('/fonts/ABCHebrew/ABCHebrew.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ABC HebrewThin';
+  src: url('/fonts/ABCHebrew/ABCHebrewThin.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ABC HebrewHeavy';
+  src: url('/fonts/ABCHebrew/ABCHebrewHeavy.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ABC HebrewBold';
+  src: url('/fonts/ABCHebrew/ABCHebrewBold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ABC HebrewMedium';
+  src: url('/fonts/ABCHebrew/ABCHebrewMedium.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ABC HebrewSuper";
+  src: url("../../public//fonts//ABCHebrew/ABCWhyteHebrew-Super-Trial.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ABC HebrewMedium';
+  src: url('/fonts/ABCHebrew/ABCHebrewMedium.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+/* @font-face {
+  font-family: "spinweradNormal";
+  src: url("../public/fonts/spinwerad/spinwerad.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'spinweradMayus';
+  src: url('../public/fonts/spinwerad/spinweradC.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+/* @font-face {
+  font-family: "emirates";
+  src: url("../public/fonts/emirates/Emirates.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "emirates1";
+  src: url("../public/fonts/emirates/Emirates.ttf");
+  font-weight: normal;
+  font-style: normal;
+} */
+
+/* .lClass {
+  font-family: "emirates1";
+}
+
+.hebrewClassic {
+  font-family: 'ABC Hebrew';
+}
+
+.hebrewSuper {
+  font-family: "ABC HebrewSuper"
+}
+
+.hebrewClassic {
+  font-family: 'ABC Hebrew';
+}
+
+.hebrewThin {
+  font-family: "ABC HebrewThin";
+}
+
+.hebrewHeavy {
+  font-family: "ABC HebrewHeavy";
+}
+
+.airTravelersFont {
+  font-family: 'airTravelersFont'
+}
+
+.americanCaptain {
+  font-family: 'AmericanCaptain'
+}
+
+.amoria {
+  font-family: 'amoria'
+}
+
+.airTravelersFont {
+  font-family: 'airTravelersFont'
+}
+
+.americanCaptain {
+  font-family: 'AmericanCaptain'
+}
+
+.amoria {
+  font-family: 'amoria'
+}
+
+.oldLondon {
+  font-family: 'OldLondon'
+}
+
+.sundrops {
+  font-family: 'Sundrops'
+}
+
+.blacklisted {
+  font-family: 'Blacklisted';
+} */
+
+@font-face {
+  font-family: 'meditative';
+  src: url('../public/fonts/meditative/Meditative.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1, h2, h3, span {
+    font-family: 'meditative';
+}
+
+.meditativeFont {
+  font-family: "meditative";
+}
+
+  

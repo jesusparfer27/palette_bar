@@ -1,0 +1,37 @@
+@media screen and (min-width: 1380px) {
+    /* .pbSvgContainer {
+        height: "100dvh";
+    } */
+
+    /* .rightMenuDesktop {
+        display: none !important;
+    } */
+
+    .visibleMenuPhone {
+        display: none;
+    }
+
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+    /* .pbSvgContainer {
+        height: "100dvh";
+    } */
+
+    .arrowVisibleDesktop {
+        display: none;
+    }
+
+    .hamburguerPhoneContainer {
+        
+    }
+
+    /* .headerSizeMobile {
+         height: calc(var(--vh, 1vh) * 100);
+    } */
+
+    
+}
