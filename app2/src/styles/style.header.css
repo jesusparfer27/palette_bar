@@ -1,37 +1,21 @@
-@media screen and (min-width: 1380px) {
-    /* .pbSvgContainer {
-        height: "100dvh";
-    } */
-
-    /* .rightMenuDesktop {
-        display: none !important;
-    } */
-
-    .visibleMenuPhone {
-        display: none;
-    }
-
-}
-
-
-
 
 @media screen and (max-width: 768px) {
-    /* .pbSvgContainer {
-        height: "100dvh";
-    } */
+   .heartContainer {
+    padding-top: 6rem;
+   }
 
-    .arrowVisibleDesktop {
-        display: none;
-    }
-
-    .hamburguerPhoneContainer {
-        
-    }
-
-    /* .headerSizeMobile {
-         height: calc(var(--vh, 1vh) * 100);
-    } */
+   .mobileText {
+      transform-origin: center;
+      transform: scale(1.6);
+   }
 
     
 }
+
+@media screen and (min-width: 1338px) {
+
+   .spacingDesktopDevice {
+      padding-bottom: 10rem;
+   }
+}
+

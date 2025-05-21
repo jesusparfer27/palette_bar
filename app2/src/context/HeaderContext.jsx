@@ -2,6 +2,9 @@
 import React, { createContext, useContext, useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useTheme } from "./ThemeContext";
+import { Draggable } from "gsap/Draggable";
+gsap.registerPlugin(Draggable);
+
 
 const HeaderContext = createContext();
 
@@ -15,6 +18,7 @@ export const HeaderProvider = ({ children }) => {
     const [dotsClickable, setDotsClickable] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false)
     const [showHr, setShowHr] = useState(false);
+    const currentDragIndex = useRef(null);
 
     const svgContainerRef = useRef(null)
     const svgIconRef = useRef(null)
@@ -22,6 +26,83 @@ export const HeaderProvider = ({ children }) => {
     dotsRefs.current = [];
     const textRef = useRef(null);
     const headerRef = useRef(null);
+
+    useEffect(() => {
+        if (!isExpanded) return;
+
+        const icon = svgIconRef.current;
+        const container = svgContainerRef.current;
+
+        if (!icon || !container) return;
+
+        console.log("📏 Container height:", container.getBoundingClientRect().height);
+
+        const dragInstance = Draggable.create(icon, {
+            type: "y",
+            bounds: container,
+            trigger: icon,
+            inertia: false,
+
+            onDrag() {
+                if (isAnimating) return;
+
+                const iconRect = icon.getBoundingClientRect();
+                const iconCenterY = iconRect.top + iconRect.height / 2;
+
+                let nearestIndex = null;
+                let nearestDistance = Infinity;
+
+                dotsRefs.current.forEach((dot, index) => {
+                    if (!dot) return;
+                    const dotRect = dot.getBoundingClientRect();
+                    const dotCenterY = dotRect.top + dotRect.height / 2;
+                    const distance = Math.abs(iconCenterY - dotCenterY);
+
+                    if (distance < nearestDistance) {
+                        nearestDistance = distance;
+                        nearestIndex = index;
+                    }
+                });
+
+                // Guarda el índice más cercano, pero no llames a setPalette aquí
+                if (nearestIndex !== currentDragIndex.current) {
+                    currentDragIndex.current = nearestIndex;
+                    console.log("Índice cercano durante drag:", nearestIndex);
+                    // Aquí podrías actualizar visuales no React o dejar pendiente
+                }
+            },
+
+            onRelease() {
+                if (isAnimating) return;
+
+                if (currentDragIndex.current === null) return;
+
+                const closestDot = dotsRefs.current[currentDragIndex.current];
+                if (!closestDot) return;
+
+                const dotRect = closestDot.getBoundingClientRect();
+                const iconRect = icon.getBoundingClientRect();
+
+                const offsetY = dotRect.top + dotRect.height / 2 - (iconRect.top + iconRect.height / 2);
+
+                // Snap con GSAP
+                gsap.to(icon, {
+                    y: `+=${offsetY}`,
+                    duration: 0.3,
+                    ease: "power2.out",
+                    onComplete() {
+                        // Ahora sí actualiza la paleta en React sin interrumpir el drag
+                        setPalette(colorGroups[currentDragIndex.current]);
+                    }
+                });
+            },
+        });
+        return () => {
+            dragInstance[0]?.kill();
+        };
+    }, [isExpanded, isAnimating, colorGroups, setPalette]);
+
+
 
 
     const collapseAnimation = () => {
@@ -43,8 +124,6 @@ export const HeaderProvider = ({ children }) => {
             ease: "power2.in"
         });
 
-
-
         tl.to(svgContainerRef.current, {
             height: '48px',
             transformOrigin: "bottom",
@@ -55,10 +134,14 @@ export const HeaderProvider = ({ children }) => {
         setIsExpanded(false);
     };
 
+
+
     const handleClick = () => {
         console.log('isExpanded before toggle:', isExpanded);
         if (isExpanded) return;
         const tl = gsap.timeline();
+
+        setIsAnimating(true); // <-- bloquea interacciones
 
         const dots = isExpanded
             ? dotsRefs.current
@@ -121,34 +204,39 @@ export const HeaderProvider = ({ children }) => {
                 }
             );
             tl.call(() => {
-                gsap.delayedCall(0.3, () => {
-                    const defaultIndex = colorGroups.findIndex(group => group.name === palette.name);
-                    const targetDot = dotsRefs.current[defaultIndex];
+                const defaultIndex = colorGroups.findIndex(group => group.name === palette.name);
+                console.log('🎯 Default index:', defaultIndex);
+                console.log('🎨 Palette name:', palette.name);
+                console.log('🎨 colorGroups[defaultIndex]:', colorGroups[defaultIndex]?.name);
+                const targetDot = dotsRefs.current[defaultIndex];
 
-                    if (targetDot && svgIconRef.current) {
-                        const dotRect = targetDot.getBoundingClientRect();
-                        const svgRect = svgIconRef.current.getBoundingClientRect();
+                if (targetDot && svgIconRef.current) {
+                    // 🔥 Asegúrate de que los transforms previos están limpios
+                    gsap.set(svgIconRef.current, { y: 0 });
 
-                        const offsetY = dotRect.top + dotRect.height / 2 - (svgRect.top + svgRect.height / 2);
+                    const dotRect = targetDot.getBoundingClientRect();
+                    const svgRect = svgIconRef.current.getBoundingClientRect();
 
-                        gsap.to(svgIconRef.current, {
-                            y: offsetY,
-                            duration: 0.4,
-                            ease: "power2.out"
-                        });
-                    }
-                });
+                    const offsetY = dotRect.top + dotRect.height / 2 - (svgRect.top + svgRect.height / 2);
+
+                    gsap.to(svgIconRef.current, {
+                        y: offsetY,
+                        duration: 0.4,
+                        ease: "power2.out"
+                    });
+                }
             });
         }
 
+       tl.call(() => {
         setIsExpanded(!isExpanded);
         setClickDelay(true);
-        setTimeout(() => {
-            setClickDelay(false); // Permitir que handleClickOutside funcione después de 2 segundos
-        }, 3000);
+    });
+    tl.call(() => {
+        setClickDelay(false);
+        setIsAnimating(false); // <-- habilita de nuevo interacciones
+    }, null, ); // Ajusta el delay si lo ves necesario
     };
-
-  
 
 
 
@@ -212,6 +300,7 @@ export const HeaderProvider = ({ children }) => {
 
         return () => clearTimeout(timer);
     }, []);
+
 
 
 
