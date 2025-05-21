@@ -1,4 +1,9 @@
 
+.svg-icon {
+   cursor: pointer !important;
+}
+
+
 @media screen and (max-width: 768px) {
    .heartContainer {
     padding-top: 6rem;

@@ -29,14 +29,16 @@ export const HeaderProvider = ({ children }) => {
     const textRef = useRef(null);
     const headerRef = useRef(null);
 
-    const throttledSetPalette = useRef(
-  throttle((palette) => {
-    setPalette(palette);
-  }, 100) // Actualiza cada 100ms como máximo
-).current;
+//     const throttledSetPalette = useRef(
+//   throttle((palette) => {
+//     setPalette(palette);
+//   }, 100)
+// ).current;
     
 
     useEffect(() => {
+               
+
         if (!isExpanded) return;
 
         const icon = svgIconRef.current;
@@ -52,8 +54,14 @@ export const HeaderProvider = ({ children }) => {
             trigger: icon,
             inertia: false,
 
+            onPress() {
+        icon.style.cursor = "pointer"; // Fuerza el cursor pointer al hacer clic
+    },
+
             onDrag() {
                 if (isAnimating) return;
+
+                icon.style.cursor = "pointer"; // Asegura que siga siendo pointer durante el drag
 
                 const iconRect = icon.getBoundingClientRect();
                 const iconCenterY = iconRect.top + iconRect.height / 2;
@@ -87,6 +95,8 @@ export const HeaderProvider = ({ children }) => {
             },
 
             onRelease() {
+
+                icon.style.cursor = "pointer"; // Asegura que siga siendo pointer durante el drag
                 if (isAnimating) return;
 
                 if (currentDragIndex.current === null) return;

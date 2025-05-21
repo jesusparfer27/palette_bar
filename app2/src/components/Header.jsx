@@ -61,11 +61,11 @@ const Header = ((props, ref) => {
                                             style={{
                                                 color: darkenHexColor(palette.colors[0], 20),
                                                 position: 'relative',
-                                                cursor: 'grab',
+                                                cursor: 'pointer',
                                                 touchAction: 'none' 
                                             }}
                                             xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 50 50"
-                                            className='w-8 h-8 mb-2'
+                                            className='w-8 h-8 mb-2 svg-icon'
 
                                             
                                         >
