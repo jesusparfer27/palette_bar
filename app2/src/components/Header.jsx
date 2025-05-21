@@ -62,7 +62,7 @@ const Header = ((props, ref) => {
                                                 color: darkenHexColor(palette.colors[0], 20),
                                                 position: 'relative',
                                                 cursor: 'grab',
-                                                touchAction: 'none' // Importante para evitar el scroll en móvil durante el drag
+                                                touchAction: 'none' 
                                             }}
                                             xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 50 50"
                                             className='w-8 h-8 mb-2'
@@ -81,8 +81,8 @@ const Header = ((props, ref) => {
                                         >
                                             {colorGroups.map((group, index) => {
                                                 const isEveryFifth = index % 4 === 0;
-                                                const normalColor = palette.colors[0];
-                                                const lightColor = `${normalColor}33`;
+                                                const normalColor = darkenHexColor(palette.colors[0], 40);
+                                                const lightColor = `${normalColor}63`;
 
                                                 return (
                                                     <button

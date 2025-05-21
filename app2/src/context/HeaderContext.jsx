@@ -3,6 +3,8 @@ import React, { createContext, useContext, useState, useRef, useEffect } from "r
 import gsap from "gsap";
 import { useTheme } from "./ThemeContext";
 import { Draggable } from "gsap/Draggable";
+import { throttle } from "lodash"; // O implementa tu propio throttle
+
 gsap.registerPlugin(Draggable);
 
 
@@ -26,6 +28,13 @@ export const HeaderProvider = ({ children }) => {
     dotsRefs.current = [];
     const textRef = useRef(null);
     const headerRef = useRef(null);
+
+    const throttledSetPalette = useRef(
+  throttle((palette) => {
+    setPalette(palette);
+  }, 100) // Actualiza cada 100ms como máximo
+).current;
+    
 
     useEffect(() => {
         if (!isExpanded) return;
@@ -70,6 +79,11 @@ export const HeaderProvider = ({ children }) => {
                     console.log("Índice cercano durante drag:", nearestIndex);
                     // Aquí podrías actualizar visuales no React o dejar pendiente
                 }
+              
+         
+                        setPalette(colorGroups[currentDragIndex.current]);
+                    
+                
             },
 
             onRelease() {
@@ -100,7 +114,7 @@ export const HeaderProvider = ({ children }) => {
         return () => {
             dragInstance[0]?.kill();
         };
-    }, [isExpanded, isAnimating, colorGroups, setPalette]);
+    }, [isExpanded, isAnimating, setPalette]);
 
 
 
